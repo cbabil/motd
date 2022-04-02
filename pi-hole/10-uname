@@ -1,0 +1,60 @@
+#!/bin/sh
+# Title.........:  PiHole-motd
+# Description...:  custom motd - Welcome Banner for the PiHole
+# Version.......:  1.0
+
+# Colors
+NC='\e[0m' # No Color
+LIGHT_GREEN='\e[1;32m'
+LIGHT_RED='\e[1;31m'
+BIBlue='\033[1;94m'
+YELLOW='\033[0;33m'
+
+# Pi-hole version
+PIHOLEVERSION=`pihole -v | grep Pi-hole | awk {'print $4, $5, $6'}`
+# Current Date/Time
+DATETIME=`date +"%A, %e %B %Y, %r"`
+# Uptime
+upSeconds="$(/usr/bin/cut -d. -f1 /proc/uptime)"
+secs=$((${upSeconds}%60))
+mins=$((${upSeconds}/60%60))
+hours=$((${upSeconds}/3600%24))
+days=$((${upSeconds}/86400))
+UPTIME=`printf "%d days, %02dh %02dm %02ds" "$days" "$hours" "$mins" "$secs"`
+# Memory
+FREEMEM=`free | grep Mem | awk '{printf $3/1024 " MB (Used)"}'`
+TOTALMEM=`cat /proc/meminfo | grep MemTotal | awk {'printf $2/1024 " MB (Total)"'}`
+MEMORY=`printf "%s / %s" "$FREEMEM" "$TOTALMEM"` 
+# Disk
+DISK=`df -h | awk 'NR==2 {printf "Total: %sB, Used: %sB, Free: %sB",$2,$3,$4;}'`
+# Last Login
+LASTUSER=`last -i $USER | grep -v 'still logged' | head -1 | awk {'print $4, $5, $6, $7'}` 
+LASTIP=`last -i $USER | grep -v 'still logged' | head -1 | awk {'printf $3'}`
+LASTLOGIN=`printf "%s from %s" "$LASTUSER" "$LASTIP"`
+# Temperature
+TEMP=`/usr/bin/vcgencmd measure_temp | cut -c "6-9"`
+TEMP_UNIT="C"
+TEMPERATURE=`printf "%s %s" "$TEMP" "$TEMP_UNIT"`
+
+echo "
+  ${LIGHT_GREEN}   .;;,.                        ${BIBlue}Pi-hole:${NC}${PIHOLEVERSION}
+  ${LIGHT_GREEN}   .ccccc:,.                    ${NC}
+  ${LIGHT_GREEN}    :cccclll:.      ..,,        ${NC}${YELLOW}Last login.....:${NC}${LASTLOGIN}
+  ${LIGHT_GREEN}     :ccccclll.   ;ooodc        ${NC}${YELLOW}Date/Time......:${NC}${DATETIME} 
+  ${LIGHT_GREEN}      'ccll:;ll .oooodc         ${NC}${YELLOW}Uptime.........:${NC}${UPTIME}
+  ${LIGHT_GREEN}        .;cll.;;looo:.          ${NC}${YELLOW}Memory.........:${NC}${MEMORY}
+  ${LIGHT_RED}            .. ','.             ${NC}${YELLOW}Disk...........:${NC}${DISK}
+  ${LIGHT_RED}           .',,,,,,'.           ${NC}${YELLOW}Temperature....:${NC}${TEMPERATURE}
+  ${LIGHT_RED}         .',,,,,,,,,,.
+  ${LIGHT_RED}       .',,,,,,,,,,,,....
+  ${LIGHT_RED}     ....''',,,,,,,'.......
+  ${LIGHT_RED}   .........  ....  .........   ${NC}${YELLOW}Commands:${NC}
+  ${LIGHT_RED}   ..........      ..........
+  ${LIGHT_RED}   ..........      ..........      ${NC}${BIBlue}raspi-config    (Configure Raspberry)${NC}
+  ${LIGHT_RED}   .........  ....  .........      ${NC}${BIBlue}pihole -h       (Show commands)${NC}
+  ${LIGHT_RED}     ........,,,,,,,'......        ${NC}${BIBlue}pihole -up      (Update PiHole)${NC}
+  ${LIGHT_RED}       ....',,,,,,,,,,,,.          ${NC}${BIBlue}pihole -r       (Repair PiHole)${NC}
+  ${LIGHT_RED}          .',,,,,,,,,'.            ${NC}${BIBlue}pihole -g       (Update Blocklist)${NC}
+  ${LIGHT_RED}           .',,,,,,'.              ${NC}${BIBlue}pihole -a -p    (Change Admin-Page passwd)${NC}
+  ${LIGHT_RED}             ..'''.${NC}
+"
