@@ -1,6 +1,6 @@
 # Pi-hole custom banner / MOTD
 
-![motd-Pi-hole](https://github.com/cbabil/motd/master/pi-hole/motd.png)
+![motd-Pi-hole](https://github.com/cbabil/motd/blob/master/pi-hole/motd.png)
 
 
 ## Installation
