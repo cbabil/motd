@@ -7,7 +7,7 @@
 
 Get this welcome banner:
 ```
-wget https://github.com/cbabil/motd/pi-hole/master/10-uname
+wget https://github.com/cbabil/motd/blob/master/pi-hole/10-uname
 ```
 
 Move the file to the foler:
