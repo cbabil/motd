@@ -11,7 +11,9 @@ BIBlue='\033[1;94m'
 YELLOW='\033[0;33m'
 
 # Pi-hole version
-PIHOLEVERSION=`pihole -v | grep Pi-hole | awk {'print $4, $5, $6'}`
+PIHOLEVERSION=`pihole -v | grep -i "Pi-hole" | awk {'print $4, $5, $6'}`
+ADMINVERSION=`pihole -v | grep -i "AdminLTE" | awk {'print $4, $5, $6'}`
+FTLVERSION=`pihole -v | grep -i "FTL" | awk {'print $4, $5, $6'}`
 # Current Date/Time
 DATETIME=`date +"%A, %e %B %Y, %r"`
 # Uptime
@@ -36,17 +38,17 @@ TEMP=`/usr/bin/vcgencmd measure_temp | cut -c "6-9"`
 TEMP_UNIT="C"
 TEMPERATURE=`printf "%s %s" "$TEMP" "$TEMP_UNIT"`
 
-echo "
+echo "                                
   ${LIGHT_GREEN}   .;;,.                        ${BIBlue}Pi-hole:${NC}${PIHOLEVERSION}
-  ${LIGHT_GREEN}   .ccccc:,.                    ${NC}
-  ${LIGHT_GREEN}    :cccclll:.      ..,,        ${NC}${YELLOW}Last login.....:${NC}${LASTLOGIN}
-  ${LIGHT_GREEN}     :ccccclll.   ;ooodc        ${NC}${YELLOW}Date/Time......:${NC}${DATETIME} 
-  ${LIGHT_GREEN}      'ccll:;ll .oooodc         ${NC}${YELLOW}Uptime.........:${NC}${UPTIME}
-  ${LIGHT_GREEN}        .;cll.;;looo:.          ${NC}${YELLOW}Memory.........:${NC}${MEMORY}
-  ${LIGHT_RED}            .. ','.             ${NC}${YELLOW}Disk...........:${NC}${DISK}
-  ${LIGHT_RED}           .',,,,,,'.           ${NC}${YELLOW}Temperature....:${NC}${TEMPERATURE}
-  ${LIGHT_RED}         .',,,,,,,,,,.
-  ${LIGHT_RED}       .',,,,,,,,,,,,....
+  ${LIGHT_GREEN}   .ccccc:,.                    ${BIBlue}AdminLTE:${NC}${ADMINVERSION}
+  ${LIGHT_GREEN}    :cccclll:.      ..,,        ${BIBlue}FTL:${NC}${FTLVERSION}
+  ${LIGHT_GREEN}     :ccccclll.   ;ooodc        ${NC}
+  ${LIGHT_GREEN}      'ccll:;ll .oooodc         ${NC}${YELLOW}Last login.....:${NC}${LASTLOGIN}
+  ${LIGHT_GREEN}        .;cll.;;looo:.          ${NC}${YELLOW}Date/Time......:${NC}${DATETIME} 
+  ${LIGHT_RED}            .. ','.               ${NC}${YELLOW}Uptime.........:${NC}${UPTIME}
+  ${LIGHT_RED}           .',,,,,,'.             ${NC}${YELLOW}Memory.........:${NC}${MEMORY}
+  ${LIGHT_RED}         .',,,,,,,,,,.          ${NC}${YELLOW}Disk...........:${NC}${DISK}
+  ${LIGHT_RED}       .',,,,,,,,,,,,....       ${NC}${YELLOW}Temperature....:${NC}${TEMPERATURE}
   ${LIGHT_RED}     ....''',,,,,,,'.......
   ${LIGHT_RED}   .........  ....  .........   ${NC}${YELLOW}Commands:${NC}
   ${LIGHT_RED}   ..........      ..........
