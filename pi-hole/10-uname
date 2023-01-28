@@ -39,14 +39,14 @@ TEMP_UNIT="C"
 TEMPERATURE=`printf "%s %s" "$TEMP" "$TEMP_UNIT"`
 
 echo "                                
-  ${LIGHT_GREEN}   .;;,.                        ${BIBlue}Pi-hole:${NC}${PIHOLEVERSION}
-  ${LIGHT_GREEN}   .ccccc:,.                    ${BIBlue}AdminLTE:${NC}${ADMINVERSION}
-  ${LIGHT_GREEN}    :cccclll:.      ..,,        ${BIBlue}FTL:${NC}${FTLVERSION}
+  ${LIGHT_GREEN}   .;;,.                        ${BIBlue}Pi-hole:  ${NC}${PIHOLEVERSION}
+  ${LIGHT_GREEN}   .ccccc:,.                    ${BIBlue}AdminLTE: ${NC}${ADMINVERSION}
+  ${LIGHT_GREEN}    :cccclll:.      ..,,        ${BIBlue}FTL:      ${NC}${FTLVERSION}
   ${LIGHT_GREEN}     :ccccclll.   ;ooodc        ${NC}
   ${LIGHT_GREEN}      'ccll:;ll .oooodc         ${NC}${YELLOW}Last login.....:${NC}${LASTLOGIN}
   ${LIGHT_GREEN}        .;cll.;;looo:.          ${NC}${YELLOW}Date/Time......:${NC}${DATETIME} 
-  ${LIGHT_RED}            .. ','.               ${NC}${YELLOW}Uptime.........:${NC}${UPTIME}
-  ${LIGHT_RED}           .',,,,,,'.             ${NC}${YELLOW}Memory.........:${NC}${MEMORY}
+  ${LIGHT_RED}            .. ','.             ${NC}${YELLOW}Uptime.........:${NC}${UPTIME}
+  ${LIGHT_RED}           .',,,,,,'.           ${NC}${YELLOW}Memory.........:${NC}${MEMORY}
   ${LIGHT_RED}         .',,,,,,,,,,.          ${NC}${YELLOW}Disk...........:${NC}${DISK}
   ${LIGHT_RED}       .',,,,,,,,,,,,....       ${NC}${YELLOW}Temperature....:${NC}${TEMPERATURE}
   ${LIGHT_RED}     ....''',,,,,,,'.......
